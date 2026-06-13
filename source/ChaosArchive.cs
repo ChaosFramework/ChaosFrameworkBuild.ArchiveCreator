@@ -26,8 +26,8 @@ namespace ChaosFrameworkBuild.ArchiveCreator
 
 #pragma warning restore ChaosCC0102
 
-        string binArchiveFile => $"{OutputPath}\\{TargetFile}";
-        string objArchiveHashFile => $"{IntermediateOutputPath}\\{TargetFile}.hash";
+        string binArchiveFile => $"{OutputPath}/{TargetFile}";
+        string objArchiveHashFile => $"{IntermediateOutputPath}/{TargetFile}.hash";
 
         public void LogMsg(string message) => Log.LogMessage(MessageImportance.High, $"-- {message}");
 

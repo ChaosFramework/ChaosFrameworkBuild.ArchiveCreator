@@ -16,7 +16,7 @@ namespace ChaosFrameworkBuild.ArchiveCreator.Util
                     .Select(file => ChaosUtil.Platform.Paths.Normalization.NormalizeFullPath(file).Substring(directory.Length + 1))
                     ;
 
-                using (ArchiveHash hash = ArchiveHash.GetHash(files, file => File.ReadAllBytes($"{directory}\\{file}")))
+                using (ArchiveHash hash = ArchiveHash.GetHash(files, file => File.ReadAllBytes($"{directory}/{file}")))
                     return hash.ToString();
             };
 
