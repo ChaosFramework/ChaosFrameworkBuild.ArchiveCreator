@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using ChaosUtil.Platform.Paths;
 using ArchiveHash = ChaosFramework.IO.ChaosArchive.ArchiveHash;
 using SysCol = System.Collections.Generic;
 
@@ -11,12 +12,13 @@ namespace ChaosFrameworkBuild.ArchiveCreator.Util
         {
             System.Func<string> calculateHash = () =>
             {
+                directory = Normalization.NormalizePath(directory);
                 SysCol.IEnumerable<string> files =
                     Directory.GetFiles(directory, "*", SearchOption.AllDirectories)
-                    .Select(file => ChaosUtil.Platform.Paths.Normalization.NormalizeFullPath(file).Substring(directory.Length + 1))
+                    .Select(file => Normalization.NormalizePath(file).Substring(directory.Length).TrimStart('/'))
                     ;
 
-                using (ArchiveHash hash = ArchiveHash.GetHash(files, file => File.ReadAllBytes($"{directory}\\{file}")))
+                using (ArchiveHash hash = ArchiveHash.GetHash(files, file => File.ReadAllBytes($"{directory}/{file}")))
                     return hash.ToString();
             };
 
